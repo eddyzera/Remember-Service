@@ -5,7 +5,7 @@
 * password
 
 ## Fluxo primário
-1. Obtendo os dados do usário para efutar o login, retornando como resposta um objeto contendo as propriedades message: 'Login successfully' status: true code: 2000
+1. Obtendo os dados do usário para efutar o login, retornando como resposta um objeto contendo as propriedades message: 'Login successfully' status: true code: 2000, userId: 1
 
 ## Fluxo alternativo: login e senha incorretas
 1. Retornar um objeto message: 'Incorrect login and password' status: false code: 4040
