@@ -9,8 +9,15 @@ export class CreateUser {
 
   async execute (user: {email: string, password: string, name: string, lastName: string}): Promise<ICreateUser> {
     const { email, password, name, lastName } = user
-    this.createUserRepository.createUser(email, password, name, lastName)
+    const validEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i
+    if (!validEmail.test(email)) {
+      return {
+        message: 'Email invalid',
+        statusCode: 401
+      }
+    }
 
+    this.createUserRepository.createUser(email, password, name, lastName)
     return { message: 'Create user with success', statusCode: 201 }
   }
 }
