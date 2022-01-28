@@ -1,3 +1,3 @@
 export interface IUseRepository {
-  findUserById(userId: number): number
+  findUserWithLoginPassowrd(email: string, password: string): number
 }

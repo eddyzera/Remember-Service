@@ -8,9 +8,9 @@ export class VerifyLogin {
     this.userRepository = userRepository
   }
 
-  execute (idUser): IVerifyLogin {
+  execute (email: string, password: string): IVerifyLogin {
     const result = {
-      id: this.userRepository.findUserById(idUser),
+      id: this.userRepository.findUserWithLoginPassowrd(email, password),
       message: 'Login successfully',
       status: true,
       code: 2000
