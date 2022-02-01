@@ -59,4 +59,23 @@ describe('CreateUser', () => {
 
     expect(result).toEqual(expected)
   })
+
+  it('should validate the name and last name of user, if its invalid return a object with values message: Name or Last Name invalid, statusCode: 401', async () => {
+    const storePasswordInvalid = {
+      email: 'esilvateste622@gmail.com',
+      password: '1234Teste',
+      name: 'John',
+      lastName: 'Doe'
+    }
+    const createRepository = new CreateUserMockRepository()
+    const createUserService = new CreateUser(createRepository)
+    const result = await createUserService.execute(storePasswordInvalid)
+
+    const expected = {
+      message: 'Name or Last Name invalid',
+      statusCode: 401
+    }
+
+    expect(result).toEqual(expected)
+  })
 })
