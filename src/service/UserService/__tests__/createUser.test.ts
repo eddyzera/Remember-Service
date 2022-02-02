@@ -1,17 +1,14 @@
 import { CreateUser } from '../createUser'
 import { CreateUserMockRepository } from './mocks/CreateUserMockRepository'
 
-let storeValid
-
 describe('CreateUser', () => {
-  beforeAll(() => {
-    storeValid = {
+  it('should create a user with the data, email, password, name, lastName', async () => {
+    const storeValid = {
       email: 'esilvateste622@gmail.com',
       password: '1234@Teste',
-      name: 'John Doe'
+      name: 'John',
+      lastName: 'Doe'
     }
-  })
-  it('should create a user with the data, email, password, name, lastName', async () => {
     const createRepository = new CreateUserMockRepository()
     const createUserService = new CreateUser(createRepository)
     const result = await createUserService.execute(storeValid)
@@ -61,15 +58,15 @@ describe('CreateUser', () => {
   })
 
   it('should validate the name and last name of user, if its invalid return a object with values message: Name or Last Name invalid, statusCode: 401', async () => {
-    const storePasswordInvalid = {
+    const storeNameAndLastNameInvalid = {
       email: 'esilvateste622@gmail.com',
-      password: '1234Teste',
-      name: 'John',
+      password: '1234@Teste',
+      name: 'John 4',
       lastName: 'Doe'
     }
     const createRepository = new CreateUserMockRepository()
     const createUserService = new CreateUser(createRepository)
-    const result = await createUserService.execute(storePasswordInvalid)
+    const result = await createUserService.execute(storeNameAndLastNameInvalid)
 
     const expected = {
       message: 'Name or Last Name invalid',

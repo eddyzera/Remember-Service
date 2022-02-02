@@ -15,8 +15,8 @@ export class CreateUser {
   }): Promise<ICreateUser> {
     const { email, password, name, lastName } = user
     const validEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i
-    const validPassword =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    const validName = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ'\s]+$/
+    const validPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
     if (!validEmail.test(email)) {
       return {
         message: 'Email invalid',
@@ -27,6 +27,20 @@ export class CreateUser {
     if (!validPassword.test(password)) {
       return {
         message: 'Password invalid',
+        statusCode: 401
+      }
+    }
+
+    if (!validName.test(name)) {
+      return {
+        message: 'Name or Last Name invalid',
+        statusCode: 401
+      }
+    }
+
+    if (!validName.test(lastName)) {
+      return {
+        message: 'Name or Last Name invalid',
         statusCode: 401
       }
     }
